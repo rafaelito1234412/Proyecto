@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Electronic Amateurs</title>
+<style>
+:root{
+    --bg:#0a0f24;
+    --panel:#11182e;
+    --accent:#00eaff;
+    --muted:#9ab3c9;
+    --shadow:0 0 25px rgba(0,0,0,0.4);
+}
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:var(--bg);
+    color:white;
+    height:100vh;
+    overflow:hidden;
+}
+/* -------------------- PANTALLA DE INTRO -------------------- */
+#intro-screen{
+    position:fixed;
+    inset:0;
+    background:radial-gradient(circle, #017e8a 0%, #00121d 70%, #000 100%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    z-index:9999;
+}
+#intro-title{
+    font-size:44px;
+    color:#03becf;
+    font-weight:900;
+    text-shadow:0 0 25px #02b8c9;
+    opacity:0;
+    animation:introText 1.8s ease forwards;
+}
+#intro-btn{
+    margin-top:25px;
+    padding:14px 28px;
+    font-size:18px;
+    border:none;
+    border-radius:10px;
+    background:#049caa;
+    color:#002b33;
+    cursor:pointer;
+    font-weight:700;
+    opacity:0;
+    transform:scale(0.8);
+    animation:introBtn 2.2s ease forwards;
+}
+#intro-flash{
+    position:fixed;
+    inset:0;
+    background:rgb(0, 225, 255);
+    opacity:0;
+    pointer-events:none;
+    z-index:9000;
+}
+@keyframes introText{
+    0%{opacity:0; transform:scale(0.7);}
+    100%{opacity:1; transform:scale(1);}
+}
+@keyframes introBtn{
+    0%{opacity:0; transform:scale(0.7);}
+    100%{opacity:1; transform:scale(1);}
+}
+@keyframes flashBoom{
+    0%{opacity:0;}
+    50%{opacity:1;}
+    100%{opacity:0;}
+}
+/* -------------------- LAYOUT PRINCIPAL -------------------- */
+.layout{
+    display:flex;
+    height:100vh;
+    overflow:hidden;
+}
+/* -------------------- BARRA LATERAL -------------------- */
+.sidebar{
+    width:260px;
+    background:#0c142b;
+    padding:25px;
+    box-shadow:var(--shadow);
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+.sidebar h2{
+    margin:0;
+    font-size:22px;
+    text-shadow:0 0 8px var(--accent);
+}
+.nav-link{
+    background:rgba(255,255,255,0.06);
+    padding:12px;
+    border-radius:10px;
+    color:#00e5ff;
+    text-decoration:none;
+    font-size:17px;
+    font-weight:600;
+    transition:0.2s;
+    display:block;
+}
+.nav-link:hover{
+    background:rgba(0,229,255,0.25);
+    color:white;
+    transform:scale(1.03);
+}
+/* -------------------- CONTENIDO -------------------- */
+.content{
+    flex:1;
+    padding:40px;
+    overflow-y:auto;
+}
+.panel{
+    display:none;
+    animation:fadeIn 0.6s ease;
+}
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(10px);}
+    to{opacity:1; transform:translateY(0);}
+}
+.card{
+    background:rgba(255,255,255,0.06);
+    padding:40px;
+    border-radius:18px;
+    backdrop-filter:blur(10px);
+    box-shadow:var(--shadow);
+    max-width:450px;
+    margin:auto;
+    text-align:center;
+}
+.logo-circular{
+    width:150px;
+    height:150px;
+    border-radius:50%;
+    object-fit:cover;
+    margin-bottom:10px;
+    box-shadow:0 0 15px #038b97;
+}
+.btn{
+    padding:12px 22px;
+    background:#00e5ff;
+    color:#041d22;
+    border:none;
+    border-radius:10px;
+    font-size:16px;
+    cursor:pointer;
+    font-weight:700;
+    transition:0.2s;
+}
+.btn:hover{
+    transform:scale(1.05);
+}
+.prod{
+    background:rgba(255,255,255,0.08);
+    padding:20px;
+    border-radius:16px;
+    margin-bottom:18px;
+}
+</style>
+</head>
+<body>
+<!-- -------------------- INTRO -------------------- -->
+<div id="intro-screen">
+    <div id="intro-title">ELECTRONIC AMATEURS</div>
+    <button id="intro-btn">ENTRAR</button>
+</div>
+<div id="intro-flash"></div>
+
+<!-- -------------------- INTERFAZ PRINCIPAL -------------------- -->
+<div class="layout" id="mainApp" style="display:none;">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Electronic</h2>
+        <a class="nav-link" href="#" data-target="home" data-sound="home.mp3">Inicio</a>
+        <a class="nav-link" href="#" data-target="entrada" data-sound="entrada.mp3">Entrada Principal</a>
+        <a class="nav-link" href="#" data-target="productos" data-sound="productos.mp3">Productos</a>
+        <a class="nav-link" href="#" data-target="info" data-sound="info.mp3">Información</a>
+        <a class="nav-link" href="#" data-target="precios" data-sound="precios.mp3">Precios</a>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+        <!-- HOME -->
+        <section id="homePanel" class="panel" style="display:block;">
+            <div class="card">
+                <img id="logoImg" src="fotodelproyecto.jpeg" class="logo-circular">
+                <p style="color:var(--muted)">Bienvenido a nuestra plataforma tecnológica.</p>
+            </div>
+        </section>
+
+        <!-- Entrada Principal -->
+        <section id="entradaPanel" class="panel">
+            <h2>Entrada Principal</h2>
+            <p style="color:var(--muted)">Bienvenido a la nueva sección principal del proyecto.</p>
+            <div class="prod">
+                <h3>Bienvenido a Electronic</h3>
+                <p style="color:var(--muted)">Aquí podrás ver un resumen general del proyecto, sus objetivos y avances.</p>
+                <button class="btn">Explorar</button>
+            </div>
+        </section>
+
+        <!-- Productos -->
+        <section id="productosPanel" class="panel">
+            <h2>Productos</h2>
+            <div class="prod">En progreso...</div>
+        </section>
+
+        <!-- Información -->
+        <section id="infoPanel" class="panel">
+            <h2>Información</h2>
+            <div class="prod">En progreso...</div>
+        </section>
+
+        <!-- Precios -->
+        <section id="preciosPanel" class="panel">
+            <h2>Precios</h2>
+            <div class="prod">En progreso...</div>
+        </section>
+    </div>
+</div>
+
+<!-- Sonidos -->
+<audio id="audioIntro" src="intro.mp3" preload="auto"></audio>
+<audio id="audioSection" preload="auto"></audio>
+
+<script>
+/* ------------------ INTRO ------------------ */
+const intro = document.getElementById("intro-screen");
+const flash = document.getElementById("intro-flash");
+const introBtn = document.getElementById("intro-btn");
+const app = document.getElementById("mainApp");
+const audioIntro = document.getElementById("audioIntro");
+const audioSection = document.getElementById("audioSection");
+
+introBtn.addEventListener("click", ()=>{
+    // Sonido de bienvenida
+    audioIntro.currentTime = 0;
+    audioIntro.play();
+
+    flash.style.animation="flashBoom 0.6s ease";
+    setTimeout(()=>{ flash.style.opacity=0; },600);
+    intro.style.transition="0.8s";
+    intro.style.opacity=0;
+    setTimeout(()=>{ intro.style.display="none"; app.style.display="flex"; },800);
+});
+
+/* ------------------ NAVEGACIÓN ------------------ */
+const panels = { 
+    home: homePanel, 
+    entrada: entradaPanel, 
+    productos: productosPanel, 
+    info: infoPanel, 
+    precios: preciosPanel 
+};
+
+const links = document.querySelectorAll(".nav-link");
+links.forEach(link=>{
+    link.addEventListener("click", ()=>{
+        const target = link.getAttribute("data-target");
+        const soundSrc = link.getAttribute("data-sound");
+
+        // Reproducir sonido de sección
+        audioSection.src = soundSrc;
+        audioSection.currentTime = 0;
+        audioSection.play();
+
+        for(let p in panels){
+            panels[p].style.display="none";
+        }
+        panels[target].style.display="block";
+    });
+});
+</script>
+</body>
+</html>
