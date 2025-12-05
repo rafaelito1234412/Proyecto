@@ -20,7 +20,13 @@ body{
     height:100vh;
     overflow:hidden;
 }
-/* -------------------- PANTALLA DE INTRO -------------------- */
+.prod img{
+    width:160px !important;
+    height:auto;
+    border-radius:10px !important;
+    display:block;
+    margin:10px auto;
+}
 #intro-screen{
     position:fixed;
     inset:0;
@@ -74,13 +80,11 @@ body{
     50%{opacity:1;}
     100%{opacity:0;}
 }
-/* -------------------- LAYOUT PRINCIPAL -------------------- */
 .layout{
     display:flex;
     height:100vh;
     overflow:hidden;
 }
-/* -------------------- BARRA LATERAL -------------------- */
 .sidebar{
     width:260px;
     background:#0c142b;
@@ -111,7 +115,6 @@ body{
     color:white;
     transform:scale(1.03);
 }
-/* -------------------- CONTENIDO -------------------- */
 .content{
     flex:1;
     padding:40px;
@@ -162,20 +165,44 @@ body{
     padding:20px;
     border-radius:16px;
     margin-bottom:18px;
+    cursor:pointer;
+}
+#modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.75);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:99999;
+}
+#modalBox{
+    background:#0c142b;
+    padding:25px;
+    width:90%;
+    max-width:500px;
+    border-radius:15px;
+    box-shadow:0 0 25px #00eaff;
+}
+#modalClose{
+    background:#00eaff;
+    border:none;
+    color:#002b33;
+    padding:10px 18px;
+    margin-top:15px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:700;
 }
 </style>
 </head>
 <body>
-<!-- -------------------- INTRO -------------------- -->
 <div id="intro-screen">
     <div id="intro-title">ELECTRONIC AMATEURS</div>
     <button id="intro-btn">ENTRAR</button>
 </div>
 <div id="intro-flash"></div>
-
-<!-- -------------------- INTERFAZ PRINCIPAL -------------------- -->
 <div class="layout" id="mainApp" style="display:none;">
-    <!-- Sidebar -->
     <div class="sidebar">
         <h2>Electronic</h2>
         <a class="nav-link" href="#" data-target="home" data-sound="home.mp3">Inicio</a>
@@ -183,100 +210,201 @@ body{
         <a class="nav-link" href="#" data-target="productos" data-sound="productos.mp3">Productos</a>
         <a class="nav-link" href="#" data-target="info" data-sound="info.mp3">Información</a>
         <a class="nav-link" href="#" data-target="precios" data-sound="precios.mp3">Precios</a>
+        <a class="nav-link" href="#" data-target="redes" data-sound="redes.mp3">Redes Sociales</a>
     </div>
-
-    <!-- Content -->
     <div class="content">
-        <!-- HOME -->
         <section id="homePanel" class="panel" style="display:block;">
             <div class="card">
-                <img id="logoImg" src="fotodelproyecto.jpeg" class="logo-circular">
+                <img id="logoImg" src="fotodelproyecto.jpeg" class="logo-circular" alt="Logo">
                 <p style="color:var(--muted)">Bienvenido a nuestra plataforma tecnológica.</p>
             </div>
         </section>
-
-        <!-- Entrada Principal -->
         <section id="entradaPanel" class="panel">
             <h2>Entrada Principal</h2>
-            <p style="color:var(--muted)">Bienvenido a la nueva sección principal del proyecto.</p>
             <div class="prod">
                 <h3>Bienvenido a Electronic</h3>
-                <p style="color:var(--muted)">Aquí podrás ver un resumen general del proyecto, sus objetivos y avances.</p>
+                <p style="color:var(--muted)">Aquí podrás ver un resumen general del proyecto.</p>
                 <button class="btn">Explorar</button>
             </div>
         </section>
-
-        <!-- Productos -->
         <section id="productosPanel" class="panel">
             <h2>Productos</h2>
-            <div class="prod">En progreso...</div>
+            <div class="prod" data-info="mouse">
+                <h3>Mouse inalámbrico recargable RGB</h3>
+                <img src="mouse.webp" alt="Mouse inalámbrico">
+                <p style="color:var(--muted)">Precio: <strong>RD$200</strong></p>
+            </div>
+            <div class="prod" data-info="cablec">
+                <h3>Cable Tipo C</h3>
+                <img src="cable_tipo_c.jpeg" alt="Cable Tipo C">
+                <p style="color:var(--muted)">Precio: <strong>RD$300</strong></p>
+            </div>
+            <div class="prod" data-info="iphone">
+                <h3>Cable iPhone</h3>
+                <img src="cable_iphone.jpeg" alt="Cable iPhone">
+                <p style="color:var(--muted)">Precio: <strong>RD$350</strong></p>
+            </div>
+            <div class="prod" data-info="micro">
+                <h3>Cable Micro USB</h3>
+                <img src="cable_micro.jpeg" alt="Cable Micro USB">
+                <p style="color:var(--muted)">Precio: <strong>RD$250</strong></p>
+            </div>
         </section>
-
-        <!-- Información -->
         <section id="infoPanel" class="panel">
             <h2>Información</h2>
             <div class="prod">En progreso...</div>
         </section>
-
-        <!-- Precios -->
         <section id="preciosPanel" class="panel">
             <h2>Precios</h2>
             <div class="prod">En progreso...</div>
         </section>
+        <section id="redesPanel" class="panel">
+            <h2>Redes Sociales</h2>
+            <div class="prod">
+                <div class="social-row">
+                    <a href="#" class="social-circle nav-link" data-target="redes" data-sound="redes.mp3">
+                        <img src="tiktok.png" alt="tiktok">
+                    </a>
+                    <span>TikTok</span>
+                </div>
+                <div class="social-row">
+                    <a href="#" class="social-circle nav-link" data-target="redes" data-sound="redes.mp3">
+                        <img src="instagram.png" alt="instagram">
+                    </a>
+                    <span>Instagram</span>
+                </div>
+                <div class="social-row">
+                    <a href="#" class="social-circle nav-link" data-target="redes" data-sound="redes.mp3">
+                        <img src="facebook.png" alt="facebook">
+                    </a>
+                    <span>Facebook</span>
+                </div>
+                <div class="social-row">
+                    <a href="#" class="social-circle nav-link" data-target="redes" data-sound="redes.mp3">
+                        <img src="youtube.png" alt="youtube">
+                    </a>
+                    <span>YouTube</span>
+                </div>
+            </div>
+        </section>
     </div>
 </div>
-
-<!-- Sonidos -->
+<div id="modal">
+    <div id="modalBox">
+        <h2 id="modalTitle"></h2>
+        <p id="modalText" style="color:var(--muted); white-space:pre-line;"></p>
+        <button id="modalClose">Cerrar</button>
+    </div>
+</div>
 <audio id="audioIntro" src="intro.mp3" preload="auto"></audio>
 <audio id="audioSection" preload="auto"></audio>
-
 <script>
-/* ------------------ INTRO ------------------ */
 const intro = document.getElementById("intro-screen");
 const flash = document.getElementById("intro-flash");
 const introBtn = document.getElementById("intro-btn");
 const app = document.getElementById("mainApp");
 const audioIntro = document.getElementById("audioIntro");
 const audioSection = document.getElementById("audioSection");
-
 introBtn.addEventListener("click", ()=>{
-    // Sonido de bienvenida
     audioIntro.currentTime = 0;
-    audioIntro.play();
-
-    flash.style.animation="flashBoom 0.6s ease";
-    setTimeout(()=>{ flash.style.opacity=0; },600);
-    intro.style.transition="0.8s";
+    try{ audioIntro.play(); }catch(e){ }
+    flash.style.animation="flashBoom 0.9s ease";
+    intro.style.transition="0.10s";
     intro.style.opacity=0;
     setTimeout(()=>{ intro.style.display="none"; app.style.display="flex"; },800);
 });
-
-/* ------------------ NAVEGACIÓN ------------------ */
-const panels = { 
-    home: homePanel, 
-    entrada: entradaPanel, 
-    productos: productosPanel, 
-    info: infoPanel, 
-    precios: preciosPanel 
+const homePanel = document.getElementById("homePanel");
+const entradaPanel = document.getElementById("entradaPanel");
+const productosPanel = document.getElementById("productosPanel");
+const infoPanel = document.getElementById("infoPanel");
+const preciosPanel = document.getElementById("preciosPanel");
+const redesPanel = document.getElementById("redesPanel");
+const panels = {
+    home: homePanel,
+    entrada: entradaPanel,
+    productos: productosPanel,
+    info: infoPanel,
+    precios: preciosPanel,
+    redes: redesPanel
 };
-
 const links = document.querySelectorAll(".nav-link");
 links.forEach(link=>{
-    link.addEventListener("click", ()=>{
+    link.addEventListener("click", (e)=>{
+        e.preventDefault();
         const target = link.getAttribute("data-target");
         const soundSrc = link.getAttribute("data-sound");
-
-        // Reproducir sonido de sección
-        audioSection.src = soundSrc;
-        audioSection.currentTime = 0;
-        audioSection.play();
-
-        for(let p in panels){
-            panels[p].style.display="none";
+        if(soundSrc){
+            audioSection.src = soundSrc;
+            audioSection.currentTime = 0;
+            try{ audioSection.play(); }catch(e){ }
         }
-        panels[target].style.display="block";
+        for(let p in panels){
+            if(panels[p]) panels[p].style.display="none";
+        }
+        if(panels[target]) panels[target].style.display="block";
     });
+});
+const modal = document.getElementById("modal");
+const modalTitle = document.getElementById("modalTitle");
+const modalText = document.getElementById("modalText");
+const modalClose = document.getElementById("modalClose");
+const descriptions = {
+    mouse: `Descripción
+Mouse Inalámbrico Yelandar RGB Recargable BT
+
+- Funciona con receptor inalámbrico y Bluetooth (dos opciones)
+- Teclas silenciosas
+- 800 / 1200 / 1600 DPI con luz LED RGB
+- Ideal para notebook y PC de escritorio
+- Ultra liviano, cómodo y preciso
+- Batería recargable 500mAh
+- Duración por carga: 10–15 días (8h diarias)
+- Modo Stand By automático
+
+Medidas:
+11.2 cm largo • 5.8 cm ancho • 2.4 cm alto
+
+Incluye:
+- Mouse inalámbrico
+- Receptor
+- Cable`,
+    cablec: `Cable Tipo C
+
+- Compatible con todos los dispositivos USB-C
+- Carga rápida
+- Revestimiento resistente
+- Longitud estándar 1m`,
+    iphone: `Cable iPhone
+
+- Compatible con iPhone y iPad
+- Conector Lightning estable
+- Material reforzado anti-quiebre
+- Longitud 1m`,
+    micro: `Cable Micro USB
+
+- Compatible con la mayoría de Android antiguos y accesorios
+- Carga y transferencia de datos
+- Resistente y flexible
+- Longitud 1m`
+};
+document.querySelectorAll(".prod").forEach(prod=>{
+    prod.addEventListener("click", ()=>{
+        const key = prod.getAttribute("data-info");
+        if(!key) return;
+        modalTitle.innerText = prod.querySelector("h3") ? prod.querySelector("h3").innerText : "Especificaciones";
+        modalText.innerText = descriptions[key] || "Descripción no disponible.";
+        modal.style.display="flex";
+    });
+});
+modalClose.addEventListener("click", ()=>{
+    modal.style.display="none";
+});
+modal.addEventListener("click", (e)=>{
+    if(e.target === modal) modal.style.display = "none";
 });
 </script>
 </body>
 </html>
+
+
+<!--chambea we-->
