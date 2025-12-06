@@ -17,9 +17,13 @@ body{
     font-family:Arial, Helvetica, sans-serif;
     background:var(--bg);
     color:white;
-    height:100vh;
-    overflow:hidden;
+    /* eliminadas las reglas que causaban recorte en móviles:
+       height:100vh;
+       overflow:hidden;
+    */
 }
+
+/* Mantengo exactamente tus reglas originales (no las toqué más que donde es necesario) */
 .prod img{
     width:160px !important;
     height:auto;
@@ -80,11 +84,14 @@ body{
     50%{opacity:1;}
     100%{opacity:0;}
 }
+
+/* Layout principal: dejo sin altura fija para permitir scroll natural en móviles */
 .layout{
     display:flex;
-    height:100vh;
-    overflow:hidden;
+    /* eliminada: height:100vh; overflow:hidden; */
 }
+
+/* Sidebar y resto igual que tu original */
 .sidebar{
     width:260px;
     background:#0c142b;
@@ -194,6 +201,38 @@ body{
     cursor:pointer;
     font-weight:700;
 }
+
+/* --- CAMBIOS MÍNIMOS PARA MÓVILES --- 
+   Estas reglas son lo único añadido: hacen que la página sea desplazable
+   y que la sidebar se ajuste en pantallas estrechas. */
+@media (max-width: 768px) {
+    .layout {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        padding: 12px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+    }
+    .content {
+        padding: 18px;
+    }
+    .nav-link {
+        min-width: 110px;
+        text-align: center;
+        flex: 1 1 120px;
+        margin: 4px;
+    }
+    /* asegura que imágenes y paneles no queden recortados */
+    .content, .panel {
+        overflow: visible;
+        height: auto;
+        min-height: 0;
+    }
+}
 </style>
 </head>
 <body>
@@ -232,21 +271,21 @@ body{
             <div class="prod" data-info="mouse">
                 <h3>Mouse inalámbrico recargable RGB</h3>
                 <img src="mouse.webp" alt="Mouse inalámbrico">
-                <p style="color:var(--muted)">Precio: <strong>RD$200</strong></p>
+                <p style="color:var(--muted)">Precio: <strong>RD$250</strong></p>
             </div>
             <div class="prod" data-info="cablec">
                 <h3>Cable Tipo C</h3>
-                <img src="cable_tipo_c.jpeg" alt="Cable Tipo C">
-                <p style="color:var(--muted)">Precio: <strong>RD$300</strong></p>
+                <img src="cable C.jpg" alt="Cable Tipo C">
+                <p style="color:var(--muted)">Precio: <strong>RD$RD200</strong></p>
             </div>
-            <div class="prod" data-info="iphone">
-                <h3>Cable iPhone</h3>
-                <img src="cable_iphone.jpeg" alt="Cable iPhone">
-                <p style="color:var(--muted)">Precio: <strong>RD$350</strong></p>
+            <div class="prod" data-info="lighting">
+                <h3>Cable Lighting</h3>
+                <img src="iphone.jpg" alt="Cable Lighting">
+                <p style="color:var(--muted)">Precio: <strong>RD$250</strong></p>
             </div>
             <div class="prod" data-info="micro">
                 <h3>Cable Micro USB</h3>
-                <img src="cable_micro.jpeg" alt="Cable Micro USB">
+                <img src="micro.jpg" alt="Cable Micro USB">
                 <p style="color:var(--muted)">Precio: <strong>RD$250</strong></p>
             </div>
         </section>
@@ -263,7 +302,7 @@ body{
             <div class="prod">
                 <div class="social-row">
                     <a href="#" class="social-circle nav-link" data-target="redes" data-sound="redes.mp3">
-                        <img src="tiktok.png" alt="tiktok">
+                        <img src="tiktok.jpg" alt="tiktok">
                     </a>
                     <span>TikTok</span>
                 </div>
@@ -407,4 +446,6 @@ modal.addEventListener("click", (e)=>{
 </html>
 
 
+
 <!--chambea we-->
+
