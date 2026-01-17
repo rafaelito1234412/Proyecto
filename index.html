@@ -17,13 +17,7 @@ body{
     font-family:Arial, Helvetica, sans-serif;
     background:var(--bg);
     color:white;
-    /* eliminadas las reglas que causaban recorte en móviles:
-       height:100vh;
-       overflow:hidden;
-    */
 }
-
-/* Mantengo exactamente tus reglas originales (no las toqué más que donde es necesario) */
 .prod img{
     width:160px !important;
     height:auto;
@@ -84,14 +78,9 @@ body{
     50%{opacity:1;}
     100%{opacity:0;}
 }
-
-/* Layout principal: dejo sin altura fija para permitir scroll natural en móviles */
 .layout{
     display:flex;
-    /* eliminada: height:100vh; overflow:hidden; */
 }
-
-/* Sidebar y resto igual que tu original */
 .sidebar{
     width:260px;
     background:#0c142b;
@@ -201,10 +190,6 @@ body{
     cursor:pointer;
     font-weight:700;
 }
-
-/* --- CAMBIOS MÍNIMOS PARA MÓVILES --- 
-   Estas reglas son lo único añadido: hacen que la página sea desplazable
-   y que la sidebar se ajuste en pantallas estrechas. */
 @media (max-width: 768px) {
     .layout {
         flex-direction: column;
@@ -226,7 +211,6 @@ body{
         flex: 1 1 120px;
         margin: 4px;
     }
-    /* asegura que imágenes y paneles no queden recortados */
     .content, .panel {
         overflow: visible;
         height: auto;
@@ -236,11 +220,14 @@ body{
 </style>
 </head>
 <body>
+
 <div id="intro-screen">
     <div id="intro-title">ELECTRONIC AMATEURS</div>
     <button id="intro-btn">ENTRAR</button>
 </div>
+
 <div id="intro-flash"></div>
+
 <div class="layout" id="mainApp" style="display:none;">
     <div class="sidebar">
         <h2>Electronic</h2>
@@ -251,13 +238,15 @@ body{
         <a class="nav-link" href="#" data-target="precios" data-sound="precios.mp3">Precios</a>
         <a class="nav-link" href="#" data-target="redes" data-sound="redes.mp3">Redes Sociales</a>
     </div>
+
     <div class="content">
         <section id="homePanel" class="panel" style="display:block;">
             <div class="card">
-                <img id="logoImg" src="fotodelproyecto.jpeg" class="logo-circular" alt="Logo">
+                <img src="fotodelproyecto.jpeg" class="logo-circular">
                 <p style="color:var(--muted)">Bienvenido a nuestra plataforma tecnológica.</p>
             </div>
         </section>
+
         <section id="entradaPanel" class="panel">
             <h2>Entrada Principal</h2>
             <div class="prod">
@@ -266,181 +255,74 @@ body{
                 <button class="btn">Explorar</button>
             </div>
         </section>
+
         <section id="productosPanel" class="panel">
             <h2>Productos</h2>
-            <div class="prod" data-info="mouse">
-                <h3>Mouse inalámbrico recargable RGB</h3>
-                <img src="mouse.jpg" alt="Mouse inalámbrico">
-                <p style="color:var(--muted)">Precio: <strong>RD$250</strong></p>
-            </div>
-            <div class="prod" data-info="cablec">
-                <h3>Cable Tipo C</h3>
-                <img src="cable_c.jpg" alt="Cable Tipo C">
-                <p style="color:var(--muted)">Precio: <strong>RD$RD200</strong></p>
-            </div>
-            <div class="prod" data-info="lighting">
-                <h3>Cable Lighting</h3>
-                <img src="iphone.jpg" alt="Cable Lighting">
-                <p style="color:var(--muted)">Precio: <strong>RD$250</strong></p>
-            </div>
-            <div class="prod" data-info="micro">
-                <h3>Cable Micro USB</h3>
-                <img src="micro.jpg" alt="Cable Micro USB">
-                <p style="color:var(--muted)">Precio: <strong>RD$250</strong></p>
-            </div>
+            <div class="prod">En progreso...</div>
         </section>
+
         <section id="infoPanel" class="panel">
             <h2>Información</h2>
             <div class="prod">En progreso...</div>
         </section>
+
         <section id="preciosPanel" class="panel">
             <h2>Precios</h2>
             <div class="prod">En progreso...</div>
         </section>
+
         <section id="redesPanel" class="panel">
             <h2>Redes Sociales</h2>
-            <div class="prod">
-                <div class="social-row">
-                    <a href="#" class="social-circle nav-link" data-target="redes" data-sound="redes.mp3">
-                        <img src="tiktok.jpg" alt="tiktok">
-                    </a>
-                    <span>TikTok</span>
-                </div>
-                <div class="social-row">
-                    <a href="#" class="social-circle nav-link" data-target="redes" data-sound="redes.mp3">
-                        <img src="instagram.png" alt="instagram">
-                    </a>
-                    <span>Instagram</span>
-                </div>
-                <div class="social-row">
-                    <a href="#" class="social-circle nav-link" data-target="redes" data-sound="redes.mp3">
-                        <img src="facebook.png" alt="facebook">
-                    </a>
-                    <span>Facebook</span>
-                </div>
-                <div class="social-row">
-                    <a href="#" class="social-circle nav-link" data-target="redes" data-sound="redes.mp3">
-                        <img src="youtube.png" alt="youtube">
-                    </a>
-                    <span>YouTube</span>
-                </div>
-            </div>
+            <div class="prod">En progreso...</div>
         </section>
     </div>
 </div>
-<div id="modal">
-    <div id="modalBox">
-        <h2 id="modalTitle"></h2>
-        <p id="modalText" style="color:var(--muted); white-space:pre-line;"></p>
-        <button id="modalClose">Cerrar</button>
-    </div>
-</div>
+
 <audio id="audioIntro" src="intro.mp3" preload="auto"></audio>
 <audio id="audioSection" preload="auto"></audio>
+
 <script>
-const intro = document.getElementById("intro-screen");
-const flash = document.getElementById("intro-flash");
-const introBtn = document.getElementById("intro-btn");
-const app = document.getElementById("mainApp");
-const audioIntro = document.getElementById("audioIntro");
-const audioSection = document.getElementById("audioSection");
-introBtn.addEventListener("click", ()=>{
-    audioIntro.currentTime = 0;
-    try{ audioIntro.play(); }catch(e){ }
+const intro=document.getElementById("intro-screen");
+const flash=document.getElementById("intro-flash");
+const introBtn=document.getElementById("intro-btn");
+const app=document.getElementById("mainApp");
+const audioIntro=document.getElementById("audioIntro");
+const audioSection=document.getElementById("audioSection");
+
+introBtn.onclick=()=>{
+    audioIntro.currentTime=0;
+    audioIntro.play().catch(()=>{});
     flash.style.animation="flashBoom 0.9s ease";
-    intro.style.transition="0.10s";
     intro.style.opacity=0;
-    setTimeout(()=>{ intro.style.display="none"; app.style.display="flex"; },800);
-});
-const homePanel = document.getElementById("homePanel");
-const entradaPanel = document.getElementById("entradaPanel");
-const productosPanel = document.getElementById("productosPanel");
-const infoPanel = document.getElementById("infoPanel");
-const preciosPanel = document.getElementById("preciosPanel");
-const redesPanel = document.getElementById("redesPanel");
-const panels = {
-    home: homePanel,
-    entrada: entradaPanel,
-    productos: productosPanel,
-    info: infoPanel,
-    precios: preciosPanel,
-    redes: redesPanel
+    setTimeout(()=>{intro.style.display="none";app.style.display="flex";},800);
 };
-const links = document.querySelectorAll(".nav-link");
-links.forEach(link=>{
-    link.addEventListener("click", (e)=>{
+
+const panels={
+    home:homePanel,
+    entrada:entradaPanel,
+    productos:productosPanel,
+    info:infoPanel,
+    precios:preciosPanel,
+    redes:redesPanel
+};
+
+document.querySelectorAll(".nav-link").forEach(link=>{
+    link.onclick=e=>{
         e.preventDefault();
-        const target = link.getAttribute("data-target");
-        const soundSrc = link.getAttribute("data-sound");
-        if(soundSrc){
-            audioSection.src = soundSrc;
-            audioSection.currentTime = 0;
-            try{ audioSection.play(); }catch(e){ }
+        const target=link.dataset.target;
+        const sound=link.dataset.sound;
+        if(sound){
+            audioSection.src=sound;
+            audioSection.currentTime=0;
+            audioSection.play().catch(()=>{});
         }
-        for(let p in panels){
-            if(panels[p]) panels[p].style.display="none";
-        }
-        if(panels[target]) panels[target].style.display="block";
-    });
-});
-const modal = document.getElementById("modal");
-const modalTitle = document.getElementById("modalTitle");
-const modalText = document.getElementById("modalText");
-const modalClose = document.getElementById("modalClose");
-const descriptions = {
-    mouse: `Descripción
-Mouse Inalámbrico Yelandar RGB Recargable BT
-
-- Funciona con receptor inalámbrico y Bluetooth (dos opciones)
-- Teclas silenciosas
-- 800 / 1200 / 1600 DPI con luz LED RGB
-- Ideal para notebook y PC de escritorio
-- Ultra liviano, cómodo y preciso
-- Batería recargable 500mAh
-- Duración por carga: 10–15 días (8h diarias)
-- Modo Stand By automático
-
-Medidas:
-11.2 cm largo • 5.8 cm ancho • 2.4 cm alto
-
-Incluye:
-- Mouse inalámbrico
-- Receptor
-- Cable`,
-    cablec: `Cable Tipo C
-
-- Compatible con todos los dispositivos USB-C
-- Carga rápida
-- Revestimiento resistente
-- Longitud estándar 1m`,
-    iphone: `Cable iPhone
-
-- Compatible con iPhone y iPad
-- Conector Lightning estable
-- Material reforzado anti-quiebre
-- Longitud 1m`,
-    micro: `Cable Micro USB
-
-- Compatible con la mayoría de Android antiguos y accesorios
-- Carga y transferencia de datos
-- Resistente y flexible
-- Longitud 1m`
-};
-document.querySelectorAll(".prod").forEach(prod=>{
-    prod.addEventListener("click", ()=>{
-        const key = prod.getAttribute("data-info");
-        if(!key) return;
-        modalTitle.innerText = prod.querySelector("h3") ? prod.querySelector("h3").innerText : "Especificaciones";
-        modalText.innerText = descriptions[key] || "Descripción no disponible.";
-        modal.style.display="flex";
-    });
-});
-modalClose.addEventListener("click", ()=>{
-    modal.style.display="none";
-});
-modal.addEventListener("click", (e)=>{
-    if(e.target === modal) modal.style.display = "none";
+        Object.values(panels).forEach(p=>p.style.display="none");
+        panels[target].style.display="block";
+    };
 });
 </script>
+
 </body>
 </html>
+
+
